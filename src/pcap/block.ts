@@ -1,4 +1,9 @@
 import { isArray, parseArray } from "./array";
+import {
+  UE_EUTRA_CAPABILITY,
+  UE_MRDC_CAPABILITY,
+  UE_NR_CAPABILITY,
+} from "./constants";
 import { getKeyValue, Line } from "./line";
 import { parseObject } from "./object";
 import { Capabilities } from "./types";
