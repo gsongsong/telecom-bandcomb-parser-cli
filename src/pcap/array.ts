@@ -1,6 +1,6 @@
 import { parseBlock } from "./block";
 import { Line } from "./line";
-import { Capabilities } from "./types";
+import { Capabilities } from "./types/capabilities";
 
 export function isArray(line: string) {
   return (

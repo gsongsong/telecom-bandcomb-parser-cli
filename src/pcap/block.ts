@@ -6,7 +6,10 @@ import {
 } from "./constants";
 import { getKeyValue, Line } from "./line";
 import { parseObject } from "./object";
-import { Capabilities } from "./types";
+import { Capabilities } from "./types/capabilities";
+import { UeEutraCapability } from "./types/ueEutraCapability";
+import { UeMrdcCapability } from "./types/ueMrdcCapability";
+import { UeNrCapability } from "./types/ueNrCapability";
 
 export function parseBlock(lines: Line[], capabilities: Capabilities) {
   if (!lines.length) {
@@ -20,13 +23,13 @@ export function parseBlock(lines: Line[], capabilities: Capabilities) {
   } else {
     const items = parseObject(lines.slice(1), capabilities);
     if (key === UE_EUTRA_CAPABILITY) {
-      capabilities.eutra = items;
+      capabilities.eutra = items as UeEutraCapability;
     }
     if (key === UE_MRDC_CAPABILITY) {
-      capabilities.mrdc = items;
+      capabilities.mrdc = items as UeMrdcCapability;
     }
     if (key === UE_NR_CAPABILITY) {
-      capabilities.nr = items;
+      capabilities.nr = items as UeNrCapability;
     }
     if (value === undefined) {
       return { [key]: items };
