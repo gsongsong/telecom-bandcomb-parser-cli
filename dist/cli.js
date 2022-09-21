@@ -3,18 +3,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const process_1 = require("process");
-const pcap_1 = require("./pcap");
-const eutra_1 = require("./pcap/parsers/eutra");
-const mrdc_1 = require("./pcap/parsers/mrdc");
-const nr_1 = require("./pcap/parsers/nr");
+const telecom_bandcomb_parser_lib_1 = require("telecom-bandcomb-parser-lib");
 if (require.main === module) {
     const filepath = process_1.argv[2];
     const content = (0, fs_1.readFileSync)(filepath, "utf8");
-    const { eutra, mrdc, nr } = (0, pcap_1.parse)(content);
+    const { eutra, mrdc, nr } = (0, telecom_bandcomb_parser_lib_1.parsePcap)(content);
     const suffix = new Date().getTime();
     const filename = `capabilities-${suffix}.csv`;
     const lines = [];
-    const eutraFeatureSets = eutra ? (0, eutra_1.parseFeatureSets)(eutra) : undefined;
+    const eutraFeatureSets = eutra ? (0, telecom_bandcomb_parser_lib_1.parseEutraFeatureSets)(eutra) : undefined;
     if (eutraFeatureSets) {
         const { featureSetsDl, featureSetsDlPerCc, featureSetsUl, featureSetsUlPerCc, } = eutraFeatureSets;
         buildTableWrapper(featureSetsDl, lines, {
@@ -37,7 +34,7 @@ if (require.main === module) {
         });
     }
     const mrdcSupportedBandCombinationList = mrdc
-        ? (0, mrdc_1.parseSupportedBandCombinationList)(mrdc)
+        ? (0, telecom_bandcomb_parser_lib_1.parseMrdcSupportedBandCombinationList)(mrdc)
         : undefined;
     if (mrdcSupportedBandCombinationList) {
         buildTableWrapper(mrdcSupportedBandCombinationList, lines, {
@@ -46,7 +43,7 @@ if (require.main === module) {
         });
     }
     const mrdcFeatureSetCombinations = mrdc
-        ? (0, mrdc_1.parseFeatureSetCombinations)(mrdc)
+        ? (0, telecom_bandcomb_parser_lib_1.parseMrdcFeatureSetCombinations)(mrdc)
         : undefined;
     if (mrdcFeatureSetCombinations) {
         buildTableWrapper(mrdcFeatureSetCombinations, lines, {
@@ -54,7 +51,7 @@ if (require.main === module) {
             indexName: "ID",
         });
     }
-    const nrFeatureSets = nr ? (0, nr_1.parseFeatureSets)(nr) : undefined;
+    const nrFeatureSets = nr ? (0, telecom_bandcomb_parser_lib_1.parseNrFeatureSets)(nr) : undefined;
     if (nrFeatureSets) {
         const { featureSetsDownlink, featureSetsUplink } = nrFeatureSets;
         buildTableWrapper(featureSetsDownlink, lines, {
