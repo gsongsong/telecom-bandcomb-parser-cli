@@ -2,18 +2,18 @@
 
 import { readFileSync, writeFileSync } from "fs";
 import { argv } from "process";
-import { parse } from "./pcap";
-import { parseFeatureSets as parseEutraFeatureSets } from "./pcap/parsers/eutra";
 import {
-  parseFeatureSetCombinations,
-  parseSupportedBandCombinationList,
-} from "./pcap/parsers/mrdc";
-import { parseFeatureSets as parseNrFeatureSets } from "./pcap/parsers/nr";
+  parsePcap,
+  parseEutraFeatureSets,
+  parseMrdcFeatureSetCombinations,
+  parseMrdcSupportedBandCombinationList,
+  parseNrFeatureSets,
+} from "telecom-bandcomb-parser-lib";
 
 if (require.main === module) {
   const filepath = argv[2];
   const content = readFileSync(filepath, "utf8");
-  const { eutra, mrdc, nr } = parse(content);
+  const { eutra, mrdc, nr } = parsePcap(content);
 
   const suffix = new Date().getTime();
   const filename = `capabilities-${suffix}.csv`;
@@ -52,7 +52,7 @@ if (require.main === module) {
   }
 
   const mrdcSupportedBandCombinationList = mrdc
-    ? parseSupportedBandCombinationList(mrdc)
+    ? parseMrdcSupportedBandCombinationList(mrdc)
     : undefined;
   if (mrdcSupportedBandCombinationList) {
     buildTableWrapper(mrdcSupportedBandCombinationList, lines, {
@@ -62,7 +62,7 @@ if (require.main === module) {
   }
 
   const mrdcFeatureSetCombinations = mrdc
-    ? parseFeatureSetCombinations(mrdc)
+    ? parseMrdcFeatureSetCombinations(mrdc)
     : undefined;
   if (mrdcFeatureSetCombinations) {
     buildTableWrapper(mrdcFeatureSetCombinations, lines, {

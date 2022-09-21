@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/pcap/index.ts"],"names":[],"mappings":";;;AAAA,mCAAqC;AACrC,iCAAmC;AAGnC,SAAgB,KAAK,CAAC,OAAe;IACnC,MAAM,KAAK,GAAG,IAAA,gBAAS,EAAC,OAAO,CAAC,CAAC;IACjC,MAAM,YAAY,GAAiB,EAAE,CAAC;IACtC,IAAA,kBAAU,EAAC,KAAK,EAAE,YAAY,CAAC,CAAC;IAChC,OAAO,YAAY,CAAC;AACtB,CAAC;AALD,sBAKC"}
