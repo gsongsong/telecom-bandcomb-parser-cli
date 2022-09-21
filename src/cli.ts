@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readFileSync, writeFileSync } from "fs";
 import { argv } from "process";
 import { parse } from "./pcap";
