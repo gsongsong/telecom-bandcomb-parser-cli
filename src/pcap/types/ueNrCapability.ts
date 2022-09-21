@@ -97,14 +97,18 @@ type UeNrCapabilityV15c0 = {
 };
 
 type FeatureSets = {
-  featureSetsDownlink?: FeatureSetDownlink[];
-  featureSetsDownlinkPerCC?: FeatureSetDownlinkPerCc[];
-  featureSetsUplink?: FeatureSetUplink[];
-  featureSetsUplinkPerCC?: FeatureSetUplinkPerCc[];
+  featureSetsDownlink?: { FeatureSetDownlink: FeatureSetDownlink }[];
+  featureSetsDownlinkPerCC?: {
+    FeatureSetDownlinkPerCC: FeatureSetDownlinkPerCc;
+  }[];
+  featureSetsUplink?: { FeatureSetUplink: FeatureSetUplink }[];
+  featureSetsUplinkPerCC?: { FeatureSetUplinkPerCC: FeatureSetUplinkPerCc }[];
 };
 
 type FeatureSetDownlink = {
-  featureSetListPerDownlinkCC: FeatureSetDownlinkPerCcId[];
+  featureSetListPerDownlinkCC: {
+    "FeatureSetDownlinkPerCC-Id": FeatureSetDownlinkPerCcId;
+  }[];
 };
 
 type FeatureSetDownlinkPerCcId = SimpleValue;
@@ -126,7 +130,9 @@ type SupportedBandwidth =
     };
 
 type FeatureSetUplink = {
-  featureSetListPerUplinkCC: FeatureSetUplinkPerCcId[];
+  featureSetListPerUplinkCC: {
+    "FeatureSetUplinkPerCC-Id": FeatureSetUplinkPerCcId;
+  }[];
 };
 
 type FeatureSetUplinkPerCcId = SimpleValue;
@@ -145,10 +151,10 @@ type RfParametersV15g0 = {
   "supportedBandCombinationList-v15g0"?: BandCombinationListV15g0;
 };
 
-export type BandCombinationList = BandCombination[];
+export type BandCombinationList = { BandCombination: BandCombination }[];
 
 type BandCombination = {
-  bandList: BandParameters[];
+  bandList: { BandParameters: BandParameters }[];
   featureSetCombination: FeatureSetCombinationId;
   "ca-ParametersEUTRA"?: CaParametersEutra;
   "ca-ParametersNR"?: never;
@@ -157,19 +163,23 @@ type BandCombination = {
   "powerClass-v1530"?: SimpleValue;
 };
 
-type BandParameters =
+export type BandParameters =
   | {
       "eutra (0)": {
-        bandEUTRA: FreqBandIndicatorEutra;
-        "ca-BandwidthClassDL-EUTRA"?: CaBandwidthClassEutra;
-        "ca-BandwidthClassUL-EUTRA"?: CaBandwidthClassEutra;
+        eutra: {
+          bandEUTRA: FreqBandIndicatorEutra;
+          "ca-BandwidthClassDL-EUTRA"?: CaBandwidthClassEutra;
+          "ca-BandwidthClassUL-EUTRA"?: CaBandwidthClassEutra;
+        };
       };
     }
   | {
       "nr (1)": {
-        bandNR: FreqBandIndicatorNr;
-        "ca-BandwidthClassDL-NR"?: CaBandwidthCalssNr;
-        "ca-BandwidthClassUL-NR"?: CaBandwidthCalssNr;
+        nr: {
+          bandNR: FreqBandIndicatorNr;
+          "ca-BandwidthClassDL-NR"?: CaBandwidthCalssNr;
+          "ca-BandwidthClassUL-NR"?: CaBandwidthCalssNr;
+        };
       };
     };
 
@@ -194,21 +204,27 @@ type MrdcParameters = {
   "intraBandENDC-Support"?: SimpleValue;
 };
 
-export type FeatureSetCombination = FeatureSetsPerBand[];
+export type FeatureSetCombination = {
+  FeatureSetsPerBand: FeatureSetsPerBand;
+}[];
 
-type FeatureSetsPerBand = FeatureSet[];
+type FeatureSetsPerBand = { FeatureSet: FeatureSet }[];
 
-type FeatureSet =
+export type FeatureSet =
   | {
       "eutra (0)": {
-        downlinkSetEUTRA: FeatureSetEutraDownlinkId;
-        uplinkSetEUTRA: FeatureSetEutraUplinkId;
+        eutra: {
+          downlinkSetEUTRA: FeatureSetEutraDownlinkId;
+          uplinkSetEUTRA: FeatureSetEutraUplinkId;
+        };
       };
     }
   | {
       "nr (1)": {
-        downlinkSetNR: FeatureSetDownlinkId;
-        uplinkSetNR: FeatureSetUplinkId;
+        nr: {
+          downlinkSetNR: FeatureSetDownlinkId;
+          uplinkSetNR: FeatureSetUplinkId;
+        };
       };
     };
 

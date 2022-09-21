@@ -9,7 +9,7 @@ import {
 
 export type UeMrdcCapability = {
   "rf-ParametersMRDC": RfParametersMrdc;
-  featureSetCombinations: FeatureSetCombination[];
+  featureSetCombinations: { FeatureSetCombination: FeatureSetCombination }[];
   lateNonCriticalExtension?: {
     [key: string]: UeMrdcCapabilityV15g0;
   };

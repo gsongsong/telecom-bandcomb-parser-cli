@@ -485,16 +485,22 @@ type UeEutraCapabilityV1510Ies = {
 };
 
 type FeatureSetsEutraR15 = {
-  "featureSetsDL-r15"?: FeatureSetDlR15[];
-  "featureSetsDL-PerCC-r15"?: FeatureSetDlPerCcR15[];
-  "featureSetsUL-r15"?: FeatureSetUlR15[];
-  "featureSetsUL-PerCC-r15"?: FeatureSetUlPerCcR15[];
-  "featureSetsDL-v1550"?: FeatureSetDlV1550[];
+  "featureSetsDL-r15"?: { "FeatureSetDL-r15": FeatureSetDlR15 }[];
+  "featureSetsDL-PerCC-r15"?: {
+    "FeatureSetDL-PerCC-r15": FeatureSetDlPerCcR15;
+  }[];
+  "featureSetsUL-r15"?: { "FeatureSetUL-r15": FeatureSetUlR15 }[];
+  "featureSetsUL-PerCC-r15"?: {
+    "FeatureSetUL-PerCC-r15": FeatureSetUlPerCcR15;
+  }[];
+  "featureSetsDL-v1550"?: { "FeatureSetDL-v1550": FeatureSetDlV1550 }[];
 };
 
 type FeatureSetDlR15 = {
   "mimo-CA-ParametersPerBoBC-r15"?: MimoCaParametersPerBoBcR15;
-  "featureSetPerCC-ListDL-r15"?: FeatureSetDlPerCcIdR15[];
+  "featureSetPerCC-ListDL-r15"?: {
+    "FeatureSetDL-PerCC-Id-r15": FeatureSetDlPerCcIdR15;
+  }[];
 };
 
 type MimoCaParametersPerBoBcR15 = {
@@ -510,7 +516,9 @@ type FeatureSetDlPerCcR15 = {
 };
 
 type FeatureSetUlR15 = {
-  "featureSetPerCC-ListUL-r15": FeatureSetUlPerCcIdR15[];
+  "featureSetPerCC-ListUL-r15": {
+    "FeatureSetUL-PerCC-Id-r15": FeatureSetUlPerCcIdR15;
+  }[];
 };
 
 type FeatureSetUlPerCcIdR15 = SimpleValue;

@@ -6,5 +6,5 @@ export function parse(content: string) {
   const lines = normalize(content);
   const capabilities: Capabilities = {};
   parseBlock(lines, capabilities);
-  console.log(capabilities);
+  return capabilities;
 }
