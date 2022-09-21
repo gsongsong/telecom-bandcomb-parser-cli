@@ -1,7 +1,7 @@
 {
   "name": "parse-bandcomb",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "3GPP E-UTRA, MR-DC and NR band combination related capabilities parser",
   "main": "dist/cli.js",
   "bin": {
     "parse-bandcomb": "node dist/cli.js"
